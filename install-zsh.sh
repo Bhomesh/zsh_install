@@ -46,7 +46,8 @@ if [ "$INSTALL_OPTIONAL" = "y" ] || [ "$INSTALL_OPTIONAL" = "Y" ]; then
     if [ "$INSTALL_PL10K" = "y" ] || [ "$INSTALL_PL10K" = "Y" ]; then
         echo "Installing Powerlevel10k..."
         # Clone Powerlevel10k repository to Oh My Zsh themes directory
-        git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+        echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
         echo "Setting Powerlevel10k as the default theme in .zshrc..."
         # Update .zshrc to use Powerlevel10k theme
         sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
