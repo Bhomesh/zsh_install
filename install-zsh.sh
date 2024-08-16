@@ -1,9 +1,6 @@
-# this is the full installation guide for zsh with OMZ, Powerlevel10k, Plugins > autocomplete, fonts > 
-
-# installation of zsh
+#!/bin/bash
 
 echo "Starting system update..."
-
 
 echo "Updating package list..."
 sudo apt-get update
@@ -26,23 +23,23 @@ else
   echo "Skipping zsh installation."
 fi
 
-read -P "Do you want to install Oh My Zsh? (y/n): " INSTALL_OMZ
+read -p "Do you want to install Oh My Zsh? (y/n): " INSTALL_OMZ
 if [ "$INSTALL_OMZ" = "y" ] || [ "$INSTALL_OMZ" = "Y" ]; then
-    echo "installing Oh My Zsh"
+    echo "Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    echo "installation done"
+    echo "Installation done."
 else
   echo "Skipping Oh My Zsh installation."
 fi
 
-read -p "Optional options want to install (y/n)" INSTALL_OPTIONAL
+read -p "Do you want to install optional components? (y/n): " INSTALL_OPTIONAL
 if [ "$INSTALL_OPTIONAL" = "y" ] || [ "$INSTALL_OPTIONAL" = "Y" ]; then
 
-    read -P "Do you want to install Powerlevel10k? (y/n): " INSTALL_PL10K
+    read -p "Do you want to install Powerlevel10k? (y/n): " INSTALL_PL10K
     if [ "$INSTALL_PL10K" = "y" ] || [ "$INSTALL_PL10K" = "Y" ]; then
-        echo "installing Powerlevel10k..."
+        echo "Installing Powerlevel10k..."
         git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-        echo "Set Powerlevel10k as the default theme in .zshrc"
+        echo "Setting Powerlevel10k as the default theme in .zshrc..."
         sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
 
         echo "Downloading and installing MesloLGS NF font..."
@@ -51,36 +48,33 @@ if [ "$INSTALL_OPTIONAL" = "y" ] || [ "$INSTALL_OPTIONAL" = "Y" ]; then
         mv "$HOME/Downloads/MesloLGS_NF_Regular.ttf" ~/.local/share/fonts/
         fc-cache -f -v
     else
-        echo "Skipping Oh My Zsh installation."
+        echo "Skipping Powerlevel10k installation."
     fi
 
-    read -P "Do you want to install Syntax Highlighting (y/n): " INSTALL_SYNH
+    read -p "Do you want to install Syntax Highlighting? (y/n): " INSTALL_SYNH
     if [ "$INSTALL_SYNH" = "y" ] || [ "$INSTALL_SYNH" = "Y" ]; then
         echo "Installing zsh-syntax-highlighting plugin..."
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
         # Add the plugin to the list in .zshrc
         sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting /' ~/.zshrc
     else
         echo "Skipping Syntax Highlighting installation."
     fi
 
-    read -P "Do you want to install Autosuggestions (y/n): " INSTALL_AS
+    read -p "Do you want to install Autosuggestions? (y/n): " INSTALL_AS
     if [ "$INSTALL_AS" = "y" ] || [ "$INSTALL_AS" = "Y" ]; then
         # Install zsh-autosuggestions plugin
         echo "Installing zsh-autosuggestions plugin..."
         git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
         # Add the plugins to the list in .zshrc
         echo "Updating .zshrc with plugins..."
         sed -i 's/plugins=(/plugins=(zsh-syntax-highlighting zsh-autosuggestions /' ~/.zshrc
-
- 
     else
         echo "Skipping Autosuggestions installation."
     fi
 
-
 else
-  echo "Skipping Optional installation."
+  echo "Skipping optional components installation."
 fi
+
+echo "Installation script completed."
