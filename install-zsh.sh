@@ -51,6 +51,7 @@ if [ "$INSTALL_OPTIONAL" = "y" ] || [ "$INSTALL_OPTIONAL" = "Y" ]; then
         echo "Setting Powerlevel10k as the default theme in .zshrc..."
         # Update .zshrc to use Powerlevel10k theme
         sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
+        exec zsh 
 
         echo "Downloading and installing MesloLGS NF font..."
         # Download and install the MesloLGS NF font
