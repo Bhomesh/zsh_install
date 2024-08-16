@@ -30,8 +30,9 @@ fi
 read -p "Do you want to install Oh My Zsh? (y/n): " INSTALL_OMZ
 if [ "$INSTALL_OMZ" = "y" ] || [ "$INSTALL_OMZ" = "Y" ]; then
     echo "Installing Oh My Zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+     -c "$(shcurl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
     echo "Installation done."
 else
   echo "Skipping Oh My Zsh installation."
@@ -49,6 +50,7 @@ if [ "$INSTALL_OPTIONAL" = "y" ] || [ "$INSTALL_OPTIONAL" = "Y" ]; then
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
         echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
         echo "Setting Powerlevel10k as the default theme in .zshrc..."
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
         # Update .zshrc to use Powerlevel10k theme
         sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
         exec zsh 
