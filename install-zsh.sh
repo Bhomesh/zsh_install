@@ -31,6 +31,7 @@ read -p "Do you want to install Oh My Zsh? (y/n): " INSTALL_OMZ
 if [ "$INSTALL_OMZ" = "y" ] || [ "$INSTALL_OMZ" = "Y" ]; then
     echo "Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    # sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     echo "Installation done."
 else
   echo "Skipping Oh My Zsh installation."
